@@ -1,551 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Dayn Forex Journey</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-<style>
-    /* ==========================
-   RESET
-========================== */
-
-*{
-
-    margin:0;
-
-    padding:0;
-
-    box-sizing:border-box;
-
-}
-
-/* ==========================
-BODY
-========================== */
-
-body{
-
-    font-family:'Poppins',sans-serif;
-
-    background:#071626;
-
-    color:white;
-
-}
-
-/* ==========================
-NAVBAR
-========================== */
-
-nav{
-
-    width:100%;
-
-    height:80px;
-
-    background:#071626;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 80px;
-
-    position:fixed;
-
-    top:0;
-
-    z-index:999;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-
-}
-
-.logo{
-
-    font-family:'Bebas Neue';
-
-    font-size:36px;
-
-    letter-spacing:2px;
-
-    color:#ffffff;
-
-}
-
-nav ul{
-
-    display:flex;
-
-    list-style:none;
-
-}
-
-nav ul li{
-
-    margin-left:40px;
-
-}
-
-nav ul li a{
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:18px;
-
-    transition:.3s;
-
-}
-
-nav ul li a:hover{
-
-    color:#0A84FF;
-
-}
-
-/* ==========================
-HERO
-========================== */
-
-.hero{
-
-    width:100%;
-
-    height:100vh;
-
-    background:
-
-    linear-gradient(
-
-    rgba(7,22,38,.85),
-
-    rgba(7,22,38,.90)
-
-    ),
-
-    url("../images/server.jpg");
-
-    background-size:cover;
-
-    background-position:center;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-}
-
-.hero-content{
-
-    max-width:900px;
-
-}
-
-.hero h1{
-
-    font-family:'Bebas Neue';
-
-    font-size:90px;
-
-    letter-spacing:4px;
-
-}
-
-.hero p{
-
-    margin-top:20px;
-
-    font-size:24px;
-
-    color:#9FB9DD;
-
-}
-
-.btn{
-
-    display:inline-block;
-
-    margin-top:40px;
-
-    padding:16px 45px;
-
-    background:#0A84FF;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:50px;
-
-    transition:.3s;
-
-}
-/*==========================
-START LEARNING
-==========================*/
-
-.learning{
-
-    padding:120px 8%;
-
-    background:#091A2D;
-
-}
-
-.learning h2{
-
-    font-family:'Bebas Neue';
-
-    font-size:64px;
-
-    text-align:center;
-
-    letter-spacing:3px;
-
-}
-
-.subtitle{
-
-    max-width:700px;
-
-    margin:20px auto 60px;
-
-    text-align:center;
-
-    color:#9FB9DD;
-
-    font-size:18px;
-
-}
-
-.learning-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-    gap:30px;
-
-}
-
-.lesson{
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:20px;
-
-    padding:35px;
-
-    transition:.35s;
-
-}
-
-.lesson:hover{
-
-    transform:translateY(-10px);
-
-    border-color:#0A84FF;
-
-    box-shadow:0 0 25px rgba(10,132,255,.35);
-
-}
-
-.lesson span{
-
-    display:inline-block;
-
-    width:55px;
-
-    height:55px;
-
-    line-height:55px;
-
-    text-align:center;
-
-    background:#0A84FF;
-
-    border-radius:50%;
-
-    font-weight:bold;
-
-    margin-bottom:20px;
-
-}
-
-.lesson h3{
-
-    margin-bottom:15px;
-
-    font-size:26px;
-
-}
-
-.lesson p{
-
-    color:#B7C6DD;
-
-    line-height:1.8;
-
-    margin-bottom:25px;
-
-}
-
-.lesson a{
-
-    color:#0A84FF;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-}
-
-.lesson a:hover{
-
-    color:#00CFFF;
-
-}
-.btn:hover{
-
-    background:#00CFFF;
-
-}
-
-/* ==========================
-FOOTER
-========================== */
-
-footer{
-
-    background:#05111E;
-
-    text-align:center;
-
-    padding:30px;
-
-    color:#8EA8CC;
-
-}
-</style>
+    
+    <style>
+        /* ==========================
+           RESET
+        ========================== */
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        /* ==========================
+           BODY
+        ========================== */
+        body { font-family:'Poppins',sans-serif; background:#071626; color:white; }
+
+        /* ==========================
+           NAVBAR & HAMBURGER
+        ========================== */
+        nav {
+            width:100%; height:80px; background:#071626; display:flex;
+            justify-content:space-between; align-items:center; padding:0 80px;
+            position:fixed; top:0; z-index:999; border-bottom:1px solid rgba(255,255,255,.08);
+        }
+        .logo { font-family:'Bebas Neue'; font-size:36px; letter-spacing:2px; color:#ffffff; }
+        
+        nav ul { display:flex; list-style:none; transition: 0.3s ease; }
+        nav ul li { margin-left:40px; }
+        nav ul li a { color:white; text-decoration:none; font-size:18px; transition:.3s; }
+        nav ul li a:hover { color:#0A84FF; }
+
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
+        .hamburger span { width: 30px; height: 3px; background-color: white; border-radius: 5px; transition: 0.3s; }
+
+        /* ==========================
+           RESPONSIVE NAVBAR (MOBILE)
+        ========================== */
+        @media (max-width: 768px) {
+            nav { padding: 0 30px; }
+            .hamburger { display: flex; }
+            nav ul {
+                position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
+                background: #071626; flex-direction: column; align-items: center; justify-content: center;
+            }
+            nav ul.active { left: 0; }
+            nav ul li { margin: 20px 0; }
+        }
+
+        /* ==========================
+           HERO
+        ========================== */
+        .hero {
+            width:100%; height:100vh;
+            background: linear-gradient(rgba(7,22,38,.85), rgba(7,22,38,.90)), url("../images/server.jpg");
+            background-size:cover; background-position:center;
+            display:flex; justify-content:center; align-items:center; text-align:center;
+        }
+        .hero-content { max-width:900px; }
+        .hero h1 { font-family:'Bebas Neue'; font-size:90px; letter-spacing:4px; }
+        .hero p { margin-top:20px; font-size:24px; color:#9FB9DD; }
+        
+        .btn {
+            display:inline-block; margin-top:40px; padding:16px 45px;
+            background:#0A84FF; color:white; text-decoration:none; border-radius:50px; transition:.3s;
+        }
+        .btn:hover { background:#00CFFF; }
+
+        /* ==========================
+           START LEARNING
+        ========================== */
+        .learning { padding:120px 8%; background:#091A2D; }
+        .learning h2 { font-family:'Bebas Neue'; font-size:64px; text-align:center; letter-spacing:3px; }
+        .subtitle { max-width:700px; margin:20px auto 60px; text-align:center; color:#9FB9DD; font-size:18px; }
+        
+        .learning-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:30px; }
+        
+        .lesson {
+            background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+            border-radius:20px; padding:35px; transition:.35s;
+        }
+        .lesson:hover { transform:translateY(-10px); border-color:#0A84FF; box-shadow:0 0 25px rgba(10,132,255,.35); }
+        .lesson span {
+            display:inline-block; width:55px; height:55px; line-height:55px; text-align:center;
+            background:#0A84FF; border-radius:50%; font-weight:bold; margin-bottom:20px;
+        }
+        .lesson h3 { margin-bottom:15px; font-size:26px; }
+        .lesson p { color:#B7C6DD; line-height:1.8; margin-bottom:25px; }
+        
+        .lesson a { color:#0A84FF; text-decoration:none; font-weight:600; cursor: pointer; }
+        .lesson a:hover { color:#00CFFF; }
+
+        /* ==========================
+           MODALS (POPUP)
+        ========================== */
+        .modal-overlay {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
+            align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        
+        .modal-content {
+            background-color: #05111E; border: 1px solid #0A84FF; border-radius: 20px;
+            padding: 40px; width: 100%; max-width: 650px; position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-height: 85vh; overflow-y: auto; /* Agar bisa discroll jika konten panjang */
+        }
+        .modal-content h3 { font-size: 36px; font-family: 'Bebas Neue'; letter-spacing: 2px; margin-bottom: 20px; color: #00CFFF; }
+        .modal-content p { color: #B7C6DD; line-height: 1.8; margin-bottom: 15px; }
+        .modal-content ul { margin-left: 20px; color: #B7C6DD; line-height: 1.8; margin-bottom: 20px; }
+        .modal-content li { margin-bottom: 10px; }
+        
+        .close-btn {
+            position: absolute; top: 20px; right: 25px; font-size: 30px;
+            font-weight: bold; color: #8EA8CC; cursor: pointer; transition: 0.3s;
+        }
+        .close-btn:hover { color: white; }
+
+        /* Custom Scrollbar for Modal */
+        .modal-content::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-track { background: #05111E; border-radius: 10px; }
+        .modal-content::-webkit-scrollbar-thumb { background: #0A84FF; border-radius: 10px; }
+
+        /* ==========================
+           FOOTER
+        ========================== */
+        footer { background:#05111E; text-align:center; padding:30px; color:#8EA8CC; }
+    </style>
 </head>
-
 <body>
 
     <nav>
-
-        <div class="logo">
-
-            DAYN FOREX JOURNEY
-
+        <div class="logo">DAYN FOREX JOURNEY</div>
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-
-        <ul>
-
+        <ul id="nav-menu">
             <li><a href="index.html">Home</a></li>
-
-            <li><a href="documentation.html">Learning Center</a></li>
-
+            <li><a href="#learning">Learning Center</a></li>
             <li><a href="instagram.html">Instagram</a></li>
-
         </ul>
-
     </nav>
 
-    
-<!-- =========================
-START LEARNING
-========================= -->
-
-<section id="learning" class="learning">
-
-    <div class="container">
-
-        <h2>
-
-            Start Your Learning Journey
-
-        </h2>
-
-        <p class="subtitle">
-
-            Learn everything from the basics of Forex to VPS, MT4, MT5,
-            Expert Advisors, and modern trading technology.
-
-        </p>
-
-        <div class="learning-grid">
-
-            <div class="lesson">
-
-                <span>01</span>
-
-                <h3>Introduction</h3>
-
-                <p>
-
-                    Learn what Dayn Forex Journey is and how to use this learning platform.
-
-                </p>
-
-                <a href="docs/introduction.html">
-
-                    Start →
-
-                </a>
-
+    <!-- START LEARNING -->
+    <section id="learning" class="learning">
+        <div class="container">
+            <h2>Start Your Learning Journey</h2>
+            <p class="subtitle">Learn everything from the basics of Forex to VPS, MT4, MT5, Expert Advisors, and modern trading technology.</p>
+            
+            <div class="learning-grid">
+                <div class="lesson">
+                    <span>01</span>
+                    <h3>Introduction</h3>
+                    <p>Mengenal apa itu Dayn Forex Journey dan tujuan dari platform pembelajaran ini.</p>
+                    <a onclick="openModal('modal-1')">Start →</a>
+                </div>
+                <div class="lesson">
+                    <span>02</span>
+                    <h3>What is Forex?</h3>
+                    <p>Pahami cara kerja pasar finansial terbesar di dunia dan alasan mengapa orang trading.</p>
+                    <a onclick="openModal('modal-2')">Learn →</a>
+                </div>
+                <div class="lesson">
+                    <span>03</span>
+                    <h3>What is a Broker?</h3>
+                    <p>Temukan peran broker, jenis-jenisnya, dan cara memilih broker yang aman.</p>
+                    <a onclick="openModal('modal-3')">Learn →</a>
+                </div>
+                <div class="lesson">
+                    <span>04</span>
+                    <h3>MetaTrader 4</h3>
+                    <p>Pelajari dasar-dasar MT4, platform trading paling legendaris dan populer.</p>
+                    <a onclick="openModal('modal-4')">Learn →</a>
+                </div>
+                <div class="lesson">
+                    <span>05</span>
+                    <h3>MetaTrader 5</h3>
+                    <p>Eksplorasi MT5 dan temukan fitur-fitur canggih yang tidak ada di generasi sebelumnya.</p>
+                    <a onclick="openModal('modal-5')">Learn →</a>
+                </div>
+                <div class="lesson">
+                    <span>06</span>
+                    <h3>Virtual Private Server</h3>
+                    <p>Pahami mengapa trader profesional sangat bergantung pada VPS untuk stabilitas.</p>
+                    <a onclick="openModal('modal-6')">Learn →</a>
+                </div>
+                <div class="lesson">
+                    <span>07</span>
+                    <h3>Expert Advisor</h3>
+                    <p>Pelajari teknologi otomatisasi trading (Robot) untuk kebebasan waktu yang sejati.</p>
+                    <a onclick="openModal('modal-7')">Learn →</a>
+                </div>
             </div>
-
-            <div class="lesson">
-
-                <span>02</span>
-
-                <h3>What is Forex?</h3>
-
-                <p>
-
-                    Understand how the Forex market works and why millions of people trade currencies.
-
-                </p>
-
-                <a href="docs/forex.html">
-
-                    Learn →
-
-                </a>
-
-            </div>
-
-            <div class="lesson">
-
-                <span>03</span>
-
-                <h3>What is a Broker?</h3>
-
-                <p>
-
-                    Discover the role of brokers and why traders need them.
-
-                </p>
-
-                <a href="docs/broker.html">
-
-                    Learn →
-
-                </a>
-
-            </div>
-
-            <div class="lesson">
-
-                <span>04</span>
-
-                <h3>MetaTrader 4</h3>
-
-                <p>
-
-                    Learn the basics of MT4, one of the most popular trading platforms.
-
-                </p>
-
-                <a href="docs/mt4.html">
-
-                    Learn →
-
-                </a>
-
-            </div>
-
-            <div class="lesson">
-
-                <span>05</span>
-
-                <h3>MetaTrader 5</h3>
-
-                <p>
-
-                    Explore MT5 and discover its advanced trading features.
-
-                </p>
-
-                <a href="docs/mt5.html">
-
-                    Learn →
-
-                </a>
-
-            </div>
-
-            <div class="lesson">
-
-                <span>06</span>
-
-                <h3>Virtual Private Server</h3>
-
-                <p>
-
-                    Understand why traders use VPS for stability and automation.
-
-                </p>
-
-                <a href="docs/vps.html">
-
-                    Learn →
-
-                </a>
-
-            </div>
-
-            <div class="lesson">
-
-                <span>07</span>
-
-                <h3>Expert Advisor</h3>
-
-                <p>
-
-                    Learn how trading automation works using Expert Advisors.
-
-                </p>
-
-                <a href="docs/ea.html">
-
-                    Learn →
-
-                </a>
-
-            </div>
-
         </div>
+    </section>
 
+    <!-- =========================
+         MODALS CONTENT
+    ========================= -->
+    
+    <!-- Modal 1: Introduction -->
+    <div id="modal-1" class="modal-overlay" onclick="closeOutside(event, 'modal-1')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-1')">&times;</span>
+            <h3>01. Introduction</h3>
+            <p><strong>Selamat datang di Dayn Forex Journey!</strong></p>
+            <p>Platform ini dirancang khusus sebagai kurikulum komprehensif untuk membawa Anda dari tahap pemula hingga menjadi trader yang memahami seluk-beluk pasar finansial dan <em>algorithmic trading</em>.</p>
+            <p>Apa yang akan Anda capai di sini?</p>
+            <ul>
+                <li><strong>Fundamental Kuat:</strong> Memahami dasar pasar mata uang tanpa jargon yang membingungkan.</li>
+                <li><strong>Penguasaan Tools:</strong> Mengoperasikan platform standar industri secara mandiri.</li>
+                <li><strong>Evolusi Trading:</strong> Beranjak dari trading manual (yang memakan waktu) ke arah modern menggunakan bantuan teknologi.</li>
+            </ul>
+            <p>Mari mulai perjalanan edukasi Anda dengan langkah yang terstruktur!</p>
+        </div>
     </div>
 
-</section>
+    <!-- Modal 2: What is Forex? -->
+    <div id="modal-2" class="modal-overlay" onclick="closeOutside(event, 'modal-2')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-2')">&times;</span>
+            <h3>02. What is Forex?</h3>
+            <p><strong>Forex (Foreign Exchange)</strong> adalah pasar global tempat bertemunya pembeli dan penjual untuk menukarkan mata uang dari berbagai negara.</p>
+            <p>Beberapa fakta penting tentang pasar Forex:</p>
+            <ul>
+                <li><strong>Volume Terbesar:</strong> Merupakan pasar finansial terbesar di dunia dengan perputaran uang lebih dari $7 Triliun per hari.</li>
+                <li><strong>Buka 24 Jam:</strong> Pasar buka 24 jam sehari, 5 hari seminggu (Senin - Jumat), mengikuti sesi waktu Sydney, Tokyo, London, dan New York.</li>
+                <li><strong>Likuiditas Tinggi:</strong> Karena besarnya volume, Anda bisa membeli atau menjual mata uang kapan saja tanpa khawatir tidak ada yang "menerima" pesanan Anda.</li>
+                <li><strong>Faktor Penggerak:</strong> Harga mata uang digerakkan oleh berita ekonomi makro, suku bunga bank sentral, dan kondisi geopolitik suatu negara.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 3: What is a Broker? -->
+    <div id="modal-3" class="modal-overlay" onclick="closeOutside(event, 'modal-3')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-3')">&times;</span>
+            <h3>03. What is a Broker?</h3>
+            <p>Sebagai individu (trader ritel), Anda tidak bisa langsung pergi ke pasar bank internasional untuk trading forex. Anda membutuhkan <strong>Broker</strong> sebagai perantara.</p>
+            <p>Fungsi utama Broker meliputi:</p>
+            <ul>
+                <li><strong>Penyedia Platform:</strong> Memberikan Anda akses ke software trading (seperti MetaTrader).</li>
+                <li><strong>Leverage:</strong> Broker memberikan "daya ungkit" dana. Contoh: Dengan dana $100 dan leverage 1:500, Anda bisa melakukan transaksi seolah-olah memiliki $50,000.</li>
+                <li><strong>Eksekusi Pesanan:</strong> Meneruskan order beli/jual Anda ke pasar global (Liquidity Providers).</li>
+            </ul>
+            <p><strong>Penting:</strong> Selalu pilih broker yang teregulasi resmi oleh badan pengawas keuangan internasional untuk memastikan dana Anda aman.</p>
+        </div>
+    </div>
+
+    <!-- Modal 4: MetaTrader 4 -->
+    <div id="modal-4" class="modal-overlay" onclick="closeOutside(event, 'modal-4')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-4')">&times;</span>
+            <h3>04. MetaTrader 4 (MT4)</h3>
+            <p>Dikembangkan oleh <em>MetaQuotes Software</em> pada tahun 2005, <strong>MetaTrader 4</strong> adalah platform trading legendaris yang masih menjadi standar industri bagi trader ritel hingga saat ini.</p>
+            <p>Kelebihan utama MT4:</p>
+            <ul>
+                <li><strong>Sederhana & Ringan:</strong> Antarmuka yang sangat ramah pemula dan tidak membutuhkan spesifikasi komputer yang tinggi.</li>
+                <li><strong>Indikator Kustom:</strong> Mendukung ribuan indikator teknikal gratis yang diciptakan oleh komunitas trader.</li>
+                <li><strong>MQL4:</strong> Menggunakan bahasa pemrograman MQL4 yang memudahkan developer membuat script dan Robot Trading (EA).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 5: MetaTrader 5 -->
+    <div id="modal-5" class="modal-overlay" onclick="closeOutside(event, 'modal-5')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-5')">&times;</span>
+            <h3>05. MetaTrader 5 (MT5)</h3>
+            <p>Dirilis pada tahun 2010 sebagai generasi penerus, <strong>MetaTrader 5</strong> dirancang untuk multi-aset (Forex, Saham, Futures) dan menawarkan fitur yang jauh lebih superior dibanding MT4.</p>
+            <p>Fitur unggulan MT5:</p>
+            <ul>
+                <li><strong>Timeframes Lebih Banyak:</strong> Memiliki 21 pilihan timeframe (dibanding MT4 yang hanya 9).</li>
+                <li><strong>Kalender Ekonomi Bawaan:</strong> Anda dapat melihat jadwal rilis berita ekonomi langsung di dalam platform.</li>
+                <li><strong>Depth of Market (DoM):</strong> Memungkinkan trader melihat likuiditas bid/ask secara real-time.</li>
+                <li><strong>Strategy Tester Canggih:</strong> Backtesting robot trading jauh lebih cepat dan akurat menggunakan pemrosesan multi-thread.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 6: Virtual Private Server (VPS) -->
+    <div id="modal-6" class="modal-overlay" onclick="closeOutside(event, 'modal-6')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-6')">&times;</span>
+            <h3>06. Virtual Private Server (VPS)</h3>
+            <p><strong>VPS</strong> adalah komputer virtual yang disewa di data center dan menyala 24 jam penuh tanpa henti. Ini adalah senjata wajib bagi <em>Algorithmic Trader</em>.</p>
+            <p>Mengapa Trader Membutuhkan VPS?</p>
+            <ul>
+                <li><strong>Uptime 100%:</strong> Melindungi proses trading dari risiko mati listrik atau internet putus di rumah.</li>
+                <li><strong>Eksekusi Cepat (Low Latency):</strong> Lokasi server VPS bisa dipilih berdekatan dengan lokasi server Broker (misalnya di London atau New York), sehingga eksekusi pesanan terjadi dalam hitungan milidetik.</li>
+                <li><strong>Otomatisasi Penuh:</strong> Robot trading (EA) membutuhkan platform yang terus menyala agar bisa memantau pasar sepanjang waktu.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 7: Expert Advisor (EA) -->
+    <div id="modal-7" class="modal-overlay" onclick="closeOutside(event, 'modal-7')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-7')">&times;</span>
+            <h3>07. Expert Advisor (EA)</h3>
+            <p><strong>Expert Advisor (EA)</strong> atau yang lebih dikenal dengan sebutan Robot Trading, adalah sebuah program perangkat lunak yang ditulis (dicoding) untuk melakukan analisa dan eksekusi transaksi secara otomatis.</p>
+            <p>Keuntungan menggunakan EA:</p>
+            <ul>
+                <li><strong>Tanpa Emosi:</strong> Mesin tidak mengenal rasa takut, serakah, atau ragu-ragu. Ia hanya mengeksekusi strategi sesuai algoritma yang ditulis.</li>
+                <li><strong>Disiplin Ketat:</strong> Manajemen risiko (Lot size, Stop Loss, Take Profit) dihitung secara matematis dan presisi dalam hitungan detik.</li>
+                <li><strong>Menghemat Waktu:</strong> Anda tidak perlu lagi duduk menatap grafik berjam-jam. EA bekerja untuk Anda 24 jam sehari, 5 hari seminggu.</li>
+                <li><strong>Backtesting:</strong> Strategi EA bisa diuji menggunakan data pergerakan harga bertahun-tahun ke belakang untuk membuktikan probabilitas kemenangannya.</li>
+            </ul>
+        </div>
+    </div>
+
     <footer>
-
         © 2026 Dayn Forex Journey
-
     </footer>
 
-</body>
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+    <script>
+        // Toggle Hamburger Menu
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("active");
+        }
 
+        // Open Modal
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add("active");
+            document.body.style.overflow = "hidden"; // Mencegah scrolling di latar belakang
+        }
+
+        // Close Modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove("active");
+            document.body.style.overflow = "auto"; // Mengembalikan fungsi scroll
+        }
+
+        // Close Modal jika user klik area gelap di luar box
+        function closeOutside(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+    </script>
+</body>
 </html>
