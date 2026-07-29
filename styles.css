@@ -199,20 +199,22 @@ nav ul li a:hover::after {
     align-items: center;
 }
 
-.ticker {
-    display: flex;
-    animation: tickerScroll 30s linear infinite;
-    white-space: nowrap;
-}
+        .ticker {
+            display: flex;
+            width: max-content;
+            animation: tickerScroll 30s linear infinite;
+            white-space: nowrap;
+            will-change: transform;
+        }
 
-.ticker-item {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 30px;
-    font-family: var(--font-mono);
-    font-size: 14px;
-}
-
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
 .ticker-pair {
     color: var(--text-secondary);
     margin-right: 10px;
