@@ -1,146 +1,851 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Forex? | Dayn Forex Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================
+           ROOT VARIABLES & RESET
+        ========================== */
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0f1629;
+            --bg-card: #111827;
+            --accent-bull: #00d26a;
+            --accent-bear: #ff4757;
+            --accent-gold: #ffd700;
+            --accent-blue: #0A84FF;
+            --accent-cyan: #00CFFF;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-glow: rgba(10, 132, 255, 0.3);
+        }
 
-<title>What is Forex? | Dayn Forex Journey</title>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<link rel="stylesheet" href="styles.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+        html { scroll-behavior: smooth; }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ==========================
+           ANIMATED BACKGROUND
+        ========================== */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(10, 132, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 132, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-1 {
+            background: var(--accent-blue);
+            top: -200px; right: -200px;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            background: var(--accent-bull);
+            bottom: -200px; left: -200px;
+            animation: floatGlow 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        /* ==========================
+           NAVBAR
+        ========================== */
+        nav {
+            width: 100%; height: 80px;
+            background: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 80px;
+            position: fixed;
+            top: 0; z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            letter-spacing: 2px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img { height: 35px; width: auto; }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover { color: #fff; }
+        nav ul li a:hover::after { width: 100%; }
+
+        /* ==========================
+           TICKER TAPE
+        ========================== */
+        .ticker-wrap {
+            position: fixed;
+            top: 80px;
+            width: 100%; height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            z-index: 998;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker {
+            display: flex;
+            animation: tickerScroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+        }
+
+        .ticker-pair { color: var(--text-secondary); margin-right: 10px; }
+        .ticker-price { color: #fff; font-weight: 500; }
+        .ticker-up { color: var(--accent-bull); }
+        .ticker-down { color: var(--accent-bear); }
+        .ticker-change { margin-left: 8px; font-size: 12px; }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ==========================
+           HERO
+        ========================== */
+        .hero {
+            margin-top: 120px;
+            width: 100%;
+            min-height: 60vh;
+            background: linear-gradient(rgba(10, 14, 26, 0.85), rgba(10, 14, 26, 0.95)),
+                url("../images/server.jpg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 100px 40px;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 80px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        /* ==========================
+           MAIN CONTENT
+        ========================== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            letter-spacing: 2px;
+            margin: 60px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .content h2::before {
+            content: '';
+            width: 4px;
+            height: 35px;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 2px;
+        }
+
+        .content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .content p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(10, 132, 255, 0.3), transparent);
+            margin: 50px 0;
+        }
+
+        /* ==========================
+           CARDS (Currency Pairs)
+        ========================== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-cyan));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(8px);
+            border-color: var(--border-glow);
+            box-shadow: 0 10px 30px rgba(10, 132, 255, 0.1);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3::before {
+            content: '◈';
+            color: var(--accent-cyan);
+            font-size: 16px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            font-size: 15px;
+        }
+
+        /* ==========================
+           GRID (Participants)
+        ========================== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .info {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .info:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-glow);
+            box-shadow: 0 15px 35px rgba(10, 132, 255, 0.1);
+        }
+
+        .info:hover::before {
+            opacity: 1;
+        }
+
+        .info .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* ==========================
+           TABLE
+        ========================== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background: linear-gradient(135deg, rgba(10, 132, 255, 0.15), rgba(0, 207, 255, 0.1));
+            color: #fff;
+            font-weight: 600;
+            padding: 18px 25px;
+            text-align: left;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px 25px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 15px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr {
+            transition: all 0.3s ease;
+        }
+
+        tr:hover {
+            background: rgba(10, 132, 255, 0.05);
+        }
+
+        td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        /* ==========================
+           NOTE BOX
+        ========================== */
+        .note {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.08), rgba(255, 193, 7, 0.03));
+            border: 1px solid rgba(255, 193, 7, 0.15);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .note::before {
+            content: '⚠';
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 40px;
+            opacity: 0.1;
+        }
+
+        .note strong {
+            color: var(--accent-gold);
+            font-size: 18px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .note p, .note {
+            color: #d4b86a;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* ==========================
+           NEXT LINK
+        ========================== */
+        .next {
+            margin-top: 50px;
+            text-align: right;
+        }
+
+        .next a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 35px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(10, 132, 255, 0.2);
+        }
+
+        .next a:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 40px rgba(10, 132, 255, 0.4);
+            gap: 15px;
+        }
+
+        /* ==========================
+           FOOTER
+        ========================== */
+        footer {
+            background: #050810;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer .social-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer .social-links a {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        footer .social-links a:hover {
+            background: var(--accent-blue);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(10, 132, 255, 0.3);
+        }
+
+        /* ==========================
+           ANIMATIONS
+        ========================== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================
+           HAMBURGER & MOBILE
+        ========================== */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .hamburger .bar {
+            width: 25px; height: 3px;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 30px; }
+            .hamburger { display: flex; }
+
+            nav ul {
+                position: fixed;
+                top: 80px; left: -100%;
+                width: 100%; height: calc(100vh - 80px);
+                background: rgba(10, 14, 26, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 60px;
+                transition: left 0.3s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                gap: 0;
+            }
+
+            nav ul.active { left: 0; }
+            nav ul li { margin: 20px 0; }
+
+            .hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            .hero { min-height: 50vh; margin-top: 80px; }
+            .hero h1 { font-size: 48px; }
+            .hero p { font-size: 18px; }
+
+            .container { padding: 50px 25px; }
+
+            .content h2 { font-size: 32px; }
+
+            .grid { grid-template-columns: 1fr; }
+
+            .ticker-wrap { display: none; }
+
+            .next { text-align: center; }
+            .next a { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
 
-<nav>
-    <a href="#" class="navbar-brand">
-        <img src="logo.png">
-    </a>
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Dayn Forex Logo">
+            <span>DAYN FOREX</span>
+        </a>
 
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="documentation.html">Learning Center</a></li>
-        <li><a href="https://www.instagram.com/daynfx_/">Instagram</a></li>
-    </ul>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="learning.html">Learning Center</a></li>
+            <li><a href="https://www.instagram.com/daynfx_/">Instagram</a></li>
+        </ul>
 
-    <!-- TAMBAHAN HTML HAMBURGER ICON -->
-    <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
-</nav>
-
-<header class="hero">
-    <div class="overlay">
-        <h1>WHAT IS FOREX?</h1>
-        <p>Understanding the world's largest financial market.</p>
-    </div>
-</header>
-
-<div class="container">
-    <div class="content">
-        <h2>Introduction</h2>
-        <p>
-        Forex (Foreign Exchange) is the global marketplace where currencies are bought and sold. It enables individuals, businesses, banks, and governments to exchange one currency for another.
-        </p>
-        <p>
-        The Forex market is the largest financial market in the world, operating 24 hours a day during weekdays across major financial centers.
-        </p>
-        <hr>
-
-        <h2>How Forex Works</h2>
-        <p>Currencies are traded in pairs. For example:</p>
-
-        <div class="card">
-            <h3>EUR/USD</h3>
-            <p>Buying this pair means you expect the Euro to strengthen against the US Dollar.</p>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </div>
-        <div class="card">
-            <h3>GBP/USD</h3>
-            <p>Selling this pair means you expect the British Pound to weaken against the US Dollar.</p>
-        </div>
-        <hr>
+    </nav>
 
-        <h2>Who Participates?</h2>
-        <div class="grid">
-            <div class="info">
-                🏦
-                <h3>Central Banks</h3>
-                <p>Manage national monetary policy.</p>
+    <!-- Ticker Tape -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">
+                <span class="ticker-pair">EUR/USD</span>
+                <span class="ticker-price">1.0845</span>
+                <span class="ticker-change ticker-up">▲ +0.12%</span>
             </div>
-            <div class="info">
-                🏛
-                <h3>Commercial Banks</h3>
-                <p>Facilitate currency exchange worldwide.</p>
+            <div class="ticker-item">
+                <span class="ticker-pair">GBP/USD</span>
+                <span class="ticker-price">1.2678</span>
+                <span class="ticker-change ticker-up">▲ +0.08%</span>
             </div>
-            <div class="info">
-                💼
-                <h3>Companies</h3>
-                <p>Exchange currencies for international business.</p>
+            <div class="ticker-item">
+                <span class="ticker-pair">USD/JPY</span>
+                <span class="ticker-price">151.42</span>
+                <span class="ticker-change ticker-down">▼ -0.25%</span>
             </div>
-            <div class="info">
-                📈
-                <h3>Retail Traders</h3>
-                <p>Trade currencies through online brokers.</p>
+            <div class="ticker-item">
+                <span class="ticker-pair">XAU/USD</span>
+                <span class="ticker-price">2,345.60</span>
+                <span class="ticker-change ticker-up">▲ +0.45%</span>
             </div>
-        </div>
-        <hr>
-
-        <h2>Popular Currency Pairs</h2>
-        <table>
-            <tr>
-                <th>Pair</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>EUR/USD</td>
-                <td>Euro vs US Dollar</td>
-            </tr>
-            <tr>
-                <td>GBP/USD</td>
-                <td>British Pound vs US Dollar</td>
-            </tr>
-            <tr>
-                <td>USD/JPY</td>
-                <td>US Dollar vs Japanese Yen</td>
-            </tr>
-            <tr>
-                <td>AUD/USD</td>
-                <td>Australian Dollar vs US Dollar</td>
-            </tr>
-        </table>
-        <hr>
-
-        <div class="note">
-            <strong>Note</strong><br>
-            Trading Forex involves risk. Understanding the market is the first step before making any trading decisions.
-        </div>
-
-        <div class="next">
-            <a href="what-is-broker.html">Next → What is a Broker?</a>
+            <div class="ticker-item">
+                <span class="ticker-pair">USD/CHF</span>
+                <span class="ticker-price">0.9032</span>
+                <span class="ticker-change ticker-down">▼ -0.05%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-pair">AUD/USD</span>
+                <span class="ticker-price">0.6543</span>
+                <span class="ticker-change ticker-up">▲ +0.18%</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item">
+                <span class="ticker-pair">EUR/USD</span>
+                <span class="ticker-price">1.0845</span>
+                <span class="ticker-change ticker-up">▲ +0.12%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-pair">GBP/USD</span>
+                <span class="ticker-price">1.2678</span>
+                <span class="ticker-change ticker-up">▲ +0.08%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-pair">USD/JPY</span>
+                <span class="ticker-price">151.42</span>
+                <span class="ticker-change ticker-down">▼ -0.25%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-pair">XAU/USD</span>
+                <span class="ticker-price">2,345.60</span>
+                <span class="ticker-change ticker-up">▲ +0.45%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-pair">USD/CHF</span>
+                <span class="ticker-price">0.9032</span>
+                <span class="ticker-change ticker-down">▼ -0.05%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-pair">AUD/USD</span>
+                <span class="ticker-price">0.6543</span>
+                <span class="ticker-change ticker-up">▲ +0.18%</span>
+            </div>
         </div>
     </div>
-</div>
 
-<footer>
-    Dayn Forex Journey © 2026
-</footer>
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>WHAT IS FOREX?</h1>
+            <p>Understanding the world's largest financial market.</p>
+        </div>
+    </header>
 
-<!-- TAMBAHAN JAVASCRIPT UNTUK TRIGGER MENU -->
-<script>
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector("nav ul");
+    <!-- Content -->
+    <div class="container">
+        <div class="content">
+            <h2 class="scroll-reveal">Introduction</h2>
+            <p class="scroll-reveal">
+                Forex (Foreign Exchange) is the global marketplace where currencies are bought and sold. It enables individuals, businesses, banks, and governments to exchange one currency for another.
+            </p>
+            <p class="scroll-reveal">
+                The Forex market is the largest financial market in the world, operating 24 hours a day during weekdays across major financial centers.
+            </p>
 
-    hamburger.addEventListener("click", () => {
-        // Menambah/menghapus class "active" saat ikon diklik
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-    });
-</script>
+            <hr>
 
+            <h2 class="scroll-reveal">How Forex Works</h2>
+            <p class="scroll-reveal">Currencies are traded in pairs. For example:</p>
+
+            <div class="card scroll-reveal">
+                <h3>EUR/USD</h3>
+                <p>Buying this pair means you expect the Euro to strengthen against the US Dollar.</p>
+            </div>
+            <div class="card scroll-reveal">
+                <h3>GBP/USD</h3>
+                <p>Selling this pair means you expect the British Pound to weaken against the US Dollar.</p>
+            </div>
+
+            <hr>
+
+            <h2 class="scroll-reveal">Who Participates?</h2>
+            <div class="grid">
+                <div class="info scroll-reveal">
+                    <span class="icon">🏦</span>
+                    <h3>Central Banks</h3>
+                    <p>Manage national monetary policy.</p>
+                </div>
+                <div class="info scroll-reveal">
+                    <span class="icon">🏛</span>
+                    <h3>Commercial Banks</h3>
+                    <p>Facilitate currency exchange worldwide.</p>
+                </div>
+                <div class="info scroll-reveal">
+                    <span class="icon">💼</span>
+                    <h3>Companies</h3>
+                    <p>Exchange currencies for international business.</p>
+                </div>
+                <div class="info scroll-reveal">
+                    <span class="icon">📈</span>
+                    <h3>Retail Traders</h3>
+                    <p>Trade currencies through online brokers.</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h2 class="scroll-reveal">Popular Currency Pairs</h2>
+            <div class="scroll-reveal">
+                <table>
+                    <tr>
+                        <th>Pair</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>EUR/USD</td>
+                        <td>Euro vs US Dollar</td>
+                    </tr>
+                    <tr>
+                        <td>GBP/USD</td>
+                        <td>British Pound vs US Dollar</td>
+                    </tr>
+                    <tr>
+                        <td>USD/JPY</td>
+                        <td>US Dollar vs Japanese Yen</td>
+                    </tr>
+                    <tr>
+                        <td>AUD/USD</td>
+                        <td>Australian Dollar vs US Dollar</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="note scroll-reveal">
+                <strong>Note</strong><br>
+                Trading Forex involves risk. Understanding the market is the first step before making any trading decisions.
+            </div>
+
+            <div class="next scroll-reveal">
+                <a href="what-is-broker.html">Next → What is a Broker?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/daynfx_/">📷</a>
+            <a href="#">💬</a>
+            <a href="#">📧</a>
+        </div>
+        <p>© 2026 Dayn Forex Journey. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 12px; opacity: 0.6;">Trade responsibly. Forex involves significant risk of loss.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector("nav ul");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Scroll Reveal
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        scrollRevealElements.forEach(el => revealObserver.observe(el));
+    </script>
 </body>
 </html>
